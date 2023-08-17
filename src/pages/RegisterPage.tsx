@@ -218,37 +218,37 @@ const RegisterPage = () => {
             });
     }
 
-    // const InitailizeLiff = async () => {
-    //     await liff.init(
-    //         {
-    //             liffId: "1655384297-BvEewepx",
-    //         },
-    //         () => {
-    //             if (liff.isLoggedIn()) {
-    //                 liff.getProfile().then((profile) => {
-    //                     loadData()
-    //                     loadDataUser(profile.userId)
-    //                     setFormRegister(prestate => ({
-    //                         ...prestate,
-    //                         userId: profile.userId
-    //                     }))
-    //                     setProfileLine({
-    //                         avatarImg: profile.pictureUrl,
-    //                         displayName: profile.displayName
-    //                     })
-    //                 });
-    //             }
-    //         },
-    //         (err) => console.log(err)
-    //     );
-    // }
+    const InitailizeLiff = async () => {
+        await liff.init(
+            {
+                liffId: "2000438386-ZDQ6d0QJ",
+            },
+            () => {
+                if (liff.isLoggedIn()) {
+                    liff.getProfile().then((profile) => {
+                        loadData()
+                        loadDataUser(profile.userId)
+                        setFormRegister(prestate => ({
+                            ...prestate,
+                            userId: profile.userId
+                        }))
+                        setProfileLine({
+                            avatarImg: profile.pictureUrl,
+                            displayName: profile.displayName
+                        })
+                    });
+                }
+            },
+            (err) => console.log(err)
+        );
+    }
 
     useEffect(() => {
         setIsLoading(true)
-        // setTimeout(() => {
-        //     setIsLoading(!true)
-        //     InitailizeLiff()
-        // }, 1800)
+        setTimeout(() => {
+            setIsLoading(!true)
+            InitailizeLiff()
+        }, 1800)
         // setProfileLine({
         //     avatarImg: defaultImg,
         //     displayName: "SGDEV"
