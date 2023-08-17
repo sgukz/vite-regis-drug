@@ -267,6 +267,7 @@ const RegisterPage = () => {
                     <Stack direction="row" alignItems="center" justifyContent="center">
                         <img src={imgBanner} alt="ร้านยาชุมชนอบอุ่น" />
                     </Stack>
+                    {API_URL}
                     {!isRegister && (
                         <>
                             <Stack direction="row" alignItems="center" justifyContent="space-between">
