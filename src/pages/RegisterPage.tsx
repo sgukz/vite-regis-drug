@@ -219,28 +219,33 @@ const RegisterPage = () => {
     }
 
     const InitailizeLiff = async () => {
-        await liff.init(
-            {
-                liffId: "2000438386-ZDQ6d0QJ",
-            },
-            () => {
-                if (liff.isLoggedIn()) {
-                    liff.getProfile().then((profile) => {
-                        loadData()
-                        loadDataUser(profile.userId)
-                        setFormRegister(prestate => ({
-                            ...prestate,
-                            userId: profile.userId
-                        }))
-                        setProfileLine({
-                            avatarImg: profile.pictureUrl,
-                            displayName: profile.displayName
-                        })
-                    });
-                }
-            },
-            (err) => console.log(err)
-        );
+        await liff.init({ liffId: "2000438386-ZDQ6d0QJ" }).catch(err=>{throw err});
+        const getProfile = await liff.getProfile();
+        console.log(getProfile);
+        
+
+        // await liff.init(
+        //     {
+        //         liffId: "2000438386-ZDQ6d0QJ",
+        //     },
+        //     () => {
+        //         if (liff.isLoggedIn()) {
+        //             liff.getProfile().then((profile) => {
+        //                 loadData()
+        //                 loadDataUser(profile.userId)
+        //                 setFormRegister(prestate => ({
+        //                     ...prestate,
+        //                     userId: profile.userId
+        //                 }))
+        //                 setProfileLine({
+        //                     avatarImg: profile.pictureUrl,
+        //                     displayName: profile.displayName
+        //                 })
+        //             });
+        //         }
+        //     },
+        //     (err) => console.log(err)
+        // );
     }
 
     useEffect(() => {
