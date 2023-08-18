@@ -283,12 +283,9 @@ const RegisterPage = () => {
 
     useEffect(() => {
         setIsLoading(true)
-        if (!isLoggedIn){
-            alert("No login")
-        }
+        if (!isLoggedIn) return;
         (async () => {
             const profile = await liff.getProfile();
-            setIsLoading(!true)
             loadData()
             loadDataUser(profile.userId)
             setFormRegister(prestate => ({
@@ -299,6 +296,7 @@ const RegisterPage = () => {
                 avatarImg: profile.pictureUrl,
                 displayName: profile.displayName
             })
+            setIsLoading(!true)
         })();
         if (!error) return;
     }, [liff, isLoggedIn, error]);
@@ -310,7 +308,6 @@ const RegisterPage = () => {
                     <Stack direction="row" alignItems="center" justifyContent="center">
                         <img src={imgBanner} alt="ร้านยาชุมชนอบอุ่น" />
                     </Stack>
-                    {JSON.stringify(profileLine)}
                     {!isRegister && (
                         <>
                             <Stack direction="row" alignItems="center" justifyContent="space-between">
