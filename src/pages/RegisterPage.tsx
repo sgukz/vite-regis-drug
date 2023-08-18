@@ -283,7 +283,9 @@ const RegisterPage = () => {
 
     useEffect(() => {
         setIsLoading(true)
-        if (!isLoggedIn) return;
+        if (!isLoggedIn){
+            alert("No login")
+        }
         (async () => {
             const profile = await liff.getProfile();
             setIsLoading(!true)
@@ -308,7 +310,7 @@ const RegisterPage = () => {
                     <Stack direction="row" alignItems="center" justifyContent="center">
                         <img src={imgBanner} alt="ร้านยาชุมชนอบอุ่น" />
                     </Stack>
-                    {API_URL}
+                    {JSON.stringify(profileLine)}
                     {!isRegister && (
                         <>
                             <Stack direction="row" alignItems="center" justifyContent="space-between">
