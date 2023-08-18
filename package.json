@@ -21,7 +21,8 @@
     "dayjs": "^1.11.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-liff": "^2.1.0"
+    "react-liff": "^2.1.0",
+    "tslib": "^2.6.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.14",
