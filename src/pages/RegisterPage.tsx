@@ -28,7 +28,8 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { red, green, grey } from '@mui/material/colors';
 
 import axios from 'axios'
-import liff from "@line/liff";
+// import liff from "@line/liff";
+import { useLiff } from 'react-liff';
 import dayjs from 'dayjs';
 import 'dayjs/locale/th'
 dayjs.locale('th')
@@ -90,7 +91,10 @@ const RegisterPage = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [isRegister, setIsRegister] = useState(false);
 
+    const { error, liff, isLoggedIn } = useLiff();
+
     const [isNotify, setIsNotify] = useState(false);
+
     const [notifyMessage, setNotifyMessage] = useState<{
         type?: string,
         title?: string,
@@ -219,10 +223,10 @@ const RegisterPage = () => {
     }
 
     const InitailizeLiff = async () => {
-        await liff.init({ liffId: "2000438386-ZDQ6d0QJ" }).catch(err=>{throw err});
-        const getProfile = await liff.getProfile();
-        console.log(getProfile);
-        
+        // await liff.init({ liffId: "2000438386-ZDQ6d0QJ" }).catch(err=>{throw err});
+        // const getProfile = await liff.getProfile();
+        // console.log(getProfile);
+
 
         // await liff.init(
         //     {
@@ -248,22 +252,39 @@ const RegisterPage = () => {
         // );
     }
 
+    // useEffect(() => {
+    //     // setIsLoading(true)
+    //     // setTimeout(() => {
+    //     //     setIsLoading(!true)
+    //     //     InitailizeLiff()
+    //     // }, 1800)
+
+    //     if (!isLoggedIn){
+    //         alert("No login")
+    //     }
+
+
+
+    //     // setProfileLine({
+    //     //     avatarImg: defaultImg,
+    //     //     displayName: "SGDEV"
+    //     // })
+    //     // setFormRegister(prestate => ({
+    //     //     ...prestate,
+    //     //     userId: "U0ce66a9d268b3f1d81d04b30631acc87"
+    //     // }))
+    //     // InitailizeLiff()
+    // }, [])
+
     useEffect(() => {
-        setIsLoading(true)
-        setTimeout(() => {
-            setIsLoading(!true)
-            InitailizeLiff()
-        }, 1800)
-        // setProfileLine({
-        //     avatarImg: defaultImg,
-        //     displayName: "SGDEV"
-        // })
-        // setFormRegister(prestate => ({
-        //     ...prestate,
-        //     userId: "U0ce66a9d268b3f1d81d04b30631acc87"
-        // }))
-        // InitailizeLiff()
-    }, [])
+        if (!isLoggedIn) return;
+        (async () => {
+            const profile = await liff.getProfile();
+            alert(profile.userId);
+            console.log(profile);
+        })();
+        if (!error) return;
+    }, [liff, isLoggedIn, error]);
 
     return (
         <>
