@@ -124,10 +124,12 @@ const RegisterPage = () => {
                             text: msg
                         })
                         setOpen(true)
+                        setTimeout(()=> {
+                            window.location.reload()
+                        }, 1500)
                     }
                 })
                 .catch(function (error) {
-
                     const { response, message } = error
                     const { data } = response
                     setNotifyMessage({
@@ -222,7 +224,7 @@ const RegisterPage = () => {
             });
     }
 
-    const InitailizeLiff = async () => {
+    // const InitailizeLiff = async () => {
         // await liff.init({ liffId: "2000438386-ZDQ6d0QJ" }).catch(err=>{throw err});
         // const getProfile = await liff.getProfile();
         // console.log(getProfile);
@@ -250,7 +252,7 @@ const RegisterPage = () => {
         //     },
         //     (err) => console.log(err)
         // );
-    }
+    // }
 
     // useEffect(() => {
     //     // setIsLoading(true)
@@ -277,11 +279,20 @@ const RegisterPage = () => {
     // }, [])
 
     useEffect(() => {
+        setIsLoading(true)
         if (!isLoggedIn) return;
         (async () => {
             const profile = await liff.getProfile();
-            alert(profile.userId);
-            console.log(profile);
+            loadData()
+            loadDataUser(profile.userId)
+            setFormRegister(prestate => ({
+                ...prestate,
+                userId: profile.userId
+            }))
+            setProfileLine({
+                avatarImg: profile.pictureUrl,
+                displayName: profile.displayName
+            })
         })();
         if (!error) return;
     }, [liff, isLoggedIn, error]);
