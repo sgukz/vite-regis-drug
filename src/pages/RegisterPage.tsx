@@ -85,7 +85,10 @@ const RegisterPage = () => {
     const [profileLine, setProfileLine] = useState<{
         avatarImg?: string,
         displayName?: string,
-    }>({})
+    }>({
+        avatarImg: defaultImg,
+        displayName: ""
+    })
 
     const [open, setOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -124,7 +127,7 @@ const RegisterPage = () => {
                             text: msg
                         })
                         setOpen(true)
-                        setTimeout(()=> {
+                        setTimeout(() => {
                             window.location.reload()
                         }, 1500)
                     }
@@ -225,33 +228,33 @@ const RegisterPage = () => {
     }
 
     // const InitailizeLiff = async () => {
-        // await liff.init({ liffId: "2000438386-ZDQ6d0QJ" }).catch(err=>{throw err});
-        // const getProfile = await liff.getProfile();
-        // console.log(getProfile);
+    // await liff.init({ liffId: "2000438386-ZDQ6d0QJ" }).catch(err=>{throw err});
+    // const getProfile = await liff.getProfile();
+    // console.log(getProfile);
 
 
-        // await liff.init(
-        //     {
-        //         liffId: "2000438386-ZDQ6d0QJ",
-        //     },
-        //     () => {
-        //         if (liff.isLoggedIn()) {
-        //             liff.getProfile().then((profile) => {
-        //                 loadData()
-        //                 loadDataUser(profile.userId)
-        //                 setFormRegister(prestate => ({
-        //                     ...prestate,
-        //                     userId: profile.userId
-        //                 }))
-        //                 setProfileLine({
-        //                     avatarImg: profile.pictureUrl,
-        //                     displayName: profile.displayName
-        //                 })
-        //             });
-        //         }
-        //     },
-        //     (err) => console.log(err)
-        // );
+    // await liff.init(
+    //     {
+    //         liffId: "2000438386-ZDQ6d0QJ",
+    //     },
+    //     () => {
+    //         if (liff.isLoggedIn()) {
+    //             liff.getProfile().then((profile) => {
+    //                 loadData()
+    //                 loadDataUser(profile.userId)
+    //                 setFormRegister(prestate => ({
+    //                     ...prestate,
+    //                     userId: profile.userId
+    //                 }))
+    //                 setProfileLine({
+    //                     avatarImg: profile.pictureUrl,
+    //                     displayName: profile.displayName
+    //                 })
+    //             });
+    //         }
+    //     },
+    //     (err) => console.log(err)
+    // );
     // }
 
     // useEffect(() => {
@@ -283,6 +286,7 @@ const RegisterPage = () => {
         if (!isLoggedIn) return;
         (async () => {
             const profile = await liff.getProfile();
+            setIsLoading(!true)
             loadData()
             loadDataUser(profile.userId)
             setFormRegister(prestate => ({
